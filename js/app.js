@@ -110,6 +110,7 @@ function mostrarClima(datos) {
         //agregamos el parrafo en este div que vamos a crear
         const resultadoDiv=document.createElement('div');
         resultadoDiv.classList.add('text-center', 'text-white');
+        resultadoDiv.appendChild(nombreCiudad);
         resultadoDiv.appendChild(actual);
         resultadoDiv.appendChild(temperaturaMax);
         resultadoDiv.appendChild(temperaturaMin);  
