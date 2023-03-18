@@ -60,6 +60,9 @@ function consultarAPI(ciudad, pais) {
 
     const url= `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
+    //muestra un spinner de carga, lo mandamos a llamar aqui porque es donde comienza a consultar al servidor
+    Spinner();
+
     //esto nos va a traer una respuesta
     fetch(url)
         //entonces vamos a tener una respuesta 
@@ -67,7 +70,7 @@ function consultarAPI(ciudad, pais) {
         //entonces vamos a tener ya los datos y validamos que los datos que nos piden sean correctos
         .then(datos=>{
 
-            limpiarHTML(); //limpiar el html previo
+            LimpiarHTML(); //limpiar el html previo
 
             if(datos.cod === "404"){
                 mostrarError('ciudad no encontrada');
@@ -125,8 +128,35 @@ function mostrarClima(datos) {
 const KelvinACentigrados= grados=> parseInt(grados - 273.15);    
 
 
-function limpiarHTML() {
+function LimpiarHTML() {
     while(resultado.firstChild){
         resultado.removeChild(resultado.firstChild);
     }
+}
+
+function Spinner() {
+    //limpiar el html
+    LimpiarHTML();
+    
+    //creamos un div para colocar el spinner 
+    const divSprinner=document.createElement('div');
+    //le agregamos una clase al div
+    divSprinner.classList.add('sk-fading-circle');
+    
+    divSprinner.innerHTML=`
+    <div class="sk-circle1 sk-circle"></div>
+    <div class="sk-circle2 sk-circle"></div>
+    <div class="sk-circle3 sk-circle"></div>
+    <div class="sk-circle4 sk-circle"></div>
+    <div class="sk-circle5 sk-circle"></div>
+    <div class="sk-circle6 sk-circle"></div>
+    <div class="sk-circle7 sk-circle"></div>
+    <div class="sk-circle8 sk-circle"></div>
+    <div class="sk-circle9 sk-circle"></div>
+    <div class="sk-circle10 sk-circle"></div>
+    <div class="sk-circle11 sk-circle"></div>
+    <div class="sk-circle12 sk-circle"></div>
+    `;
+
+    resultado.appendChild(divSprinner);
 }
